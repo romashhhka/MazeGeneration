@@ -44,7 +44,6 @@ int main() {
     int height = GetCorrectNumber(5, 50);*/
     int width = 15;
     int height = 15;
-    cout << "15" << endl;
 
     Maze maze(width, height);
     Run(RecursiveBacktracker, maze, "Ильичев Роман АС-22-05");
