@@ -31,6 +31,7 @@ void OpenHorisontalWay(Maze& maze, Cell& curr_cell, Cell& next_cell)
         }
         else
         {
+            
             maze.cell(curr_cell.x, curr_cell.y).Right = Open;
             maze.cell(next_cell.x, curr_cell.y).Left = Open;
         }
