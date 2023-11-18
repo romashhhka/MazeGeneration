@@ -6,9 +6,13 @@ using namespace std;
 vector<Cell> NeighbourCells(Maze& maze, Cell& curr_cell, int height, int width)
 {
     vector<Cell> neighbour_cells;
+    if (curr_cell.x > 0)
     neighbour_cells.push_back(maze.cell(curr_cell.x - 1, curr_cell.y));
+    if (curr_cell.x < (width - 1))
     neighbour_cells.push_back(maze.cell(curr_cell.x + 1, curr_cell.y));
+    if (curr_cell.y > 0)
     neighbour_cells.push_back(maze.cell(curr_cell.x, curr_cell.y - 1));
+    if (curr_cell.y < (height - 1))
     neighbour_cells.push_back(maze.cell(curr_cell.x, curr_cell.y + 1));
 
     return neighbour_cells;
@@ -56,9 +60,9 @@ int unvisitedCount(Maze& maze) //Посчитать, сколько клеток
 { 
     int count = 0;
 
-    for (int i=0; i<maze.height; ++i)
+    for (int i=0; i<maze.width; ++i)
     {
-        for (int j=0; j<maze.width; ++j)
+        for (int j=0; j<maze.height; ++j)
         {
             if (maze.cell(i, j).visited==false)
                 count += 1;
