@@ -128,7 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\VScode\C++\homework_cpp\MazeGeneration\MazeGeneration\AldousBroderGersh.cpp" />
+    <ClCompile Include="AldousBroderGersh.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="MazeGeneration.cpp" />
     <ClCompile Include="RecursiveBacktrackerIlichev.cpp" />
