@@ -47,7 +47,8 @@ int main() {
 
     Maze maze(width, height);
     Run(RecursiveBacktracker, maze, "Ильичев Роман АС-22-05");
-
+    maze.Clear();
+    Run(BinaryTree, maze, "Конончук Виктор АС-22-05");
     //RecursiveBacktracker(maze);
 }
 

@@ -12,3 +12,5 @@ using Algorithm = void(*)(Maze& maze);
 // Ильичев Роман АС-22-05
 // АЛГОРИМТ ОБРАТНОГО ОТСЛЕЖИВАНИЯ - RECURSIVE BACKTRACKER
 void RecursiveBacktracker(Maze& maze);
+//березка
+void BinaryTree(Maze& maze);
