@@ -17,7 +17,7 @@ vector<Cell> NeighbourCells(Maze& maze, Cell& curr_cell, int height, int width)
 
 
 // Открывает путь между соседними горизонтальными ячейками
-void OpenHorisontalWay(Maze& maze, Cell& curr_cell, Cell& next_cell)
+void OpenHorisontalWay1(Maze& maze, Cell& curr_cell, Cell& next_cell)
 {
     if (next_cell.x != curr_cell.x)
     {
@@ -35,7 +35,7 @@ void OpenHorisontalWay(Maze& maze, Cell& curr_cell, Cell& next_cell)
 }
 
 // Открывает путь между соседними вертикальными ячейками
-void OpenVerticalWay(Maze& maze, Cell& curr_cell, Cell& next_cell)
+void OpenVerticalWay1(Maze& maze, Cell& curr_cell, Cell& next_cell)
 {
     if (next_cell.y != curr_cell.y)
     {
@@ -78,7 +78,7 @@ void AldousBroder(Maze& maze)
 
     curr_cell.visited = true; // Пометка ячейки, как пройденной
 
-    // Пока существуют свободные соседние ячейки
+    // Пока существуют свободные ячейки
     while (unvisitedCount(maze)>0)
     {
         vector<Cell> neighbour_cells = NeighbourCells(maze, curr_cell, maze.height, maze.width); // Вектор соседних ячеек
@@ -87,8 +87,8 @@ void AldousBroder(Maze& maze)
         if (maze.cell(next_cell.x, next_cell.y).visited == false) // Если соседняя ячейка не посещена (есть стенка)
         {
             // Открытие пути между текущей и соседней ячейками
-            OpenHorisontalWay(maze, curr_cell, next_cell);
-            OpenVerticalWay(maze, curr_cell, next_cell);
+            OpenHorisontalWay1(maze, curr_cell, next_cell);
+            OpenVerticalWay1(maze, curr_cell, next_cell);
 
             maze.cell(next_cell.x, next_cell.y).visited = true; //Сосед посещен
         }
