@@ -46,8 +46,7 @@ int main() {
     int height = 15;
 
     Maze maze(width, height);
-    Run(RecursiveBacktracker, maze, "Ильичев Роман АС-22-05");
-
+    Run(Prime, maze, "Алиев Али АС-22-05");
     //RecursiveBacktracker(maze);
 }
 
