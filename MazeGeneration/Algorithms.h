@@ -12,3 +12,7 @@ using Algorithm = void(*)(Maze& maze);
 // Ильичев Роман АС-22-05
 // АЛГОРИМТ ОБРАТНОГО ОТСЛЕЖИВАНИЯ - RECURSIVE BACKTRACKER
 void RecursiveBacktracker(Maze& maze);
+
+// Саклакова Валерия АС-22-05
+// АЛГОРИТМ SIDEWINDER
+void Sidewinder(Maze& maze);
