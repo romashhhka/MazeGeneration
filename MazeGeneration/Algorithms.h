@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <Windows.h>
+#include <tuple>
 #include "Maze.h"
 
 using Algorithm = void(*)(Maze& maze);
@@ -12,3 +13,4 @@ using Algorithm = void(*)(Maze& maze);
 // »Î¸Ë˜Â‚ –ÓÏ‡Ì ¿—-22-05
 // ¿À√Œ–»Ã“ Œ¡–¿“ÕŒ√Œ Œ“—À≈∆»¬¿Õ»ﬂ - RECURSIVE BACKTRACKER
 void RecursiveBacktracker(Maze& maze);
+void WilsonAlgorithm(Maze& maze);
