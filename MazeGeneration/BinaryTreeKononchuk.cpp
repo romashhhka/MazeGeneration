@@ -6,7 +6,7 @@ void BinaryTree(Maze& maze) {
 	for (int y = 0;y < maze.height;y++) {
 		for (int x = 0;x < maze.width;x++) {
 			dir = rand() % 2;
-			if (dir and y != 0) {
+			if ((dir || x==maze.width-1) && y != 0) {
 				maze.cell(x, y).Top = Open;
 				maze.cell(x, y - 1).Bottom = Open;
 			}
