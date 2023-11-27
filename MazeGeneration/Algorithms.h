@@ -6,6 +6,8 @@
 #include <time.h>
 #include <Windows.h>
 #include <tuple>
+#include <cmath>
+#include <algorithm>
 #include "Maze.h"
 
 using Algorithm = void(*)(Maze& maze);
