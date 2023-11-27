@@ -12,25 +12,25 @@ int Min(std::vector<Cell>& path,char par)
     int ans = 100000;
     if (par=='x')
     {
-        if (path[path.size()].x < ans)
-            ans = path[path.size()].x;
         if (path[path.size()-1].x < ans)
-            ans = path[path.size()].x;
+            ans = path[path.size()-1].x;
         if (path[path.size()-2].x < ans)
-            ans = path[path.size()].x;
+            ans = path[path.size()-2].x;
         if (path[path.size()-3].x < ans)
-            ans = path[path.size()].x;
+            ans = path[path.size()-3].x;
+        if (path[path.size()-4].x < ans)
+            ans = path[path.size()-4].x;
     }
     else if(par == 'y')
     {
-        if (path[path.size()].y < ans)
-            ans = path[path.size()].y;
-        if (path[path.size() - 1].y < ans)
-            ans = path[path.size()].y;
+        if (path[path.size()-1].y < ans)
+            ans = path[path.size()-1].y;
         if (path[path.size() - 2].y < ans)
-            ans = path[path.size()].y;
+            ans = path[path.size()-2].y;
         if (path[path.size() - 3].y < ans)
-            ans = path[path.size()].y;
+            ans = path[path.size()-3].y;
+        if (path[path.size() - 4].y < ans)
+            ans = path[path.size()-4].y;
     }
     return ans;
 }
@@ -41,25 +41,25 @@ int Max(std::vector<Cell>& path, char par)
     int ans = -1;
     if (par == 'x')
     {
-        if (path[path.size()].x > ans)
-            ans = path[path.size()].x;
-        if (path[path.size() - 1].x > ans)
-            ans = path[path.size()].x;
+        if (path[path.size()-1].x > ans)
+            ans = path[path.size()-1].x;
         if (path[path.size() - 2].x > ans)
-            ans = path[path.size()].x;
+            ans = path[path.size()-2].x;
         if (path[path.size() - 3].x > ans)
-            ans = path[path.size()].x;
+            ans = path[path.size()-3].x;
+        if (path[path.size() - 4].x > ans)
+            ans = path[path.size()-4].x;
     }
     else if (par == 'y')
     {
-        if (path[path.size()].y > ans)
-            ans = path[path.size()].y;
-        if (path[path.size() - 1].y > ans)
-            ans = path[path.size()].y;
+        if (path[path.size()-1].y > ans)
+            ans = path[path.size()-1].y;
         if (path[path.size() - 2].y > ans)
-            ans = path[path.size()].y;
+            ans = path[path.size()-2].y;
         if (path[path.size() - 3].y > ans)
-            ans = path[path.size()].y;
+            ans = path[path.size()-3].y;
+        if (path[path.size() - 4].y > ans)
+            ans = path[path.size()-4].y;
     }
     return ans;
 }
@@ -67,7 +67,7 @@ int Max(std::vector<Cell>& path, char par)
 void BuildPath(std::vector<Cell>& path, Maze& maze)// добовл€ет путь в лабиринт
 {
     int x = 0, y = 0, nx = 0, ny = 0;
-    for (int i = 0; i < path.size()-1; i++)
+    for (int i = 0; i < path.size()-2; i++)
     {
         x = path[i].x;
         y = path[i].y;
@@ -108,7 +108,7 @@ bool NotLightCercle(std::vector<Cell>& path)//Ќјѕ»—ј“№ провер€ет на микроциклы
         //среднее между минимальным и максимальным значени€ми среди последних 4 клеток 
         //сравнение идет по x и y и если соответствующие значени€ совпадают по обеим 
         //координатам то образуетс€ цикл из 4 клеток
-        if ((Min(path, 'x') + Max(path, 'x') / 2 == (path[path.size()].x + path[path.size() - 1].x + path[path.size() - 2].x + path[path.size() - 3].x) / 4) && (Min(path, 'y') + Max(path, 'y') / 2 == (path[path.size()].y + path[path.size() - 1].y + path[path.size() - 2].y + path[path.size() - 3].y) / 4))
+        if ((Min(path, 'x') + Max(path, 'x') / 2 == (path[path.size()-1].x + path[path.size() - 2].x + path[path.size() - 3].x + path[path.size() - 4].x) / 4) && (Min(path, 'y') + Max(path, 'y') / 2 == (path[path.size()-1].y + path[path.size() - 2].y + path[path.size() - 3].y + path[path.size() - 4].y) / 4))
         {
             return 0;
         }
@@ -199,9 +199,12 @@ void WilsonAlgorithm(Maze& maze)//нужна проверка на то что клетка окружена уже п
         std::vector<Cell> path;//путь остовного дерева
         path.push_back(maze.cell(currentX, currentY));
         bool alreadyIs;
+        int count = 0;
+        int last_size;
 
         while (ThereAreUnvisitedCells(maze))//создаем путь до €чеек которые уже есть в лабиринте
         {
+            last_size = path.size();
             nextX = currentX;//нужна проверка на циклы 
             nextY = currentY;
             alreadyIs = 0;
@@ -224,6 +227,20 @@ void WilsonAlgorithm(Maze& maze)//нужна проверка на то что клетка окружена уже п
                     BuildPath(path, maze);
             }            
 
-
+            if (last_size==path.size())
+            {
+                count++;
+            }
+            else
+            {
+                count = 0;
+            }
+            if (count == 15)
+            {
+                for (int i = 1; i < path.size()-1; i++)
+                {
+                    path.pop_back();
+                }
+            }
         }
 }
