@@ -47,8 +47,7 @@ int main() {
 
     Maze maze(width, height);
     Run(RecursiveBacktracker, maze, "Ильичев Роман АС-22-05");
-    while(true)
-        Run(WilsonAlgorithm, maze, "Гудов Никита АС-22-05");
+    Run(WilsonAlgorithm, maze, "Гудов Никита АС-22-05");
     //RecursiveBacktracker(maze);
 }
 

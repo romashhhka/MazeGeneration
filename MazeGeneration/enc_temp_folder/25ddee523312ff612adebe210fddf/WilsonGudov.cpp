@@ -247,10 +247,10 @@ void WilsonAlgorithm(Maze& maze)//нужна проверка на то что клетка окружена уже п
                 for (int i = 0; i < 3; i++)
                 {
                     path.pop_back();
-                    currentX = path[path.size() - 1].x;//перенеси вниз за фигурные скобки
-                    currentY = path[path.size() - 1].y;//перенеси вниз за фигурные скобки
-                    nextX = currentX;                  //перенеси вниз за фигурные скобки
-                    nextY = currentY;                  //перенеси вниз за фигурные скобки
+                    currentX = path[path.size() - 1].x;
+                    currentY = path[path.size() - 1].y;
+                    nextX = currentX;
+                    nextY = currentY;
                 }
             }
 
