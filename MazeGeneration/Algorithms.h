@@ -11,11 +11,19 @@
 
 using Algorithm = void(*)(Maze& maze);
 
-// Ильичев Роман АС-22-05
-// АЛГОРИМТ ОБРАТНОГО ОТСЛЕЖИВАНИЯ - RECURSIVE BACKTRACKER
+// Г€Г«ГјГЁГ·ГҐГў ГђГ®Г¬Г Г­ ГЂГ‘-22-05
+// ГЂГ‹ГѓГЋГђГ€ГЊГ’ ГЋГЃГђГЂГ’ГЌГЋГѓГЋ ГЋГ’Г‘Г‹Г…Г†Г€Г‚ГЂГЌГ€Гџ - RECURSIVE BACKTRACKER
 void RecursiveBacktracker(Maze& maze);
 
 
-// Мазепа Александр АС-22-05
-
+// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ-22-05
 void Eller(Maze& maze);
+// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ-22-05
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅ - ALDOUS-BRODER
+void AldousBroder(Maze& maze);
+void Prime(Maze& maze);
+//ГЎГҐГ°ГҐГ§ГЄГ 
+void BinaryTree(Maze& maze);
+// Г‘Г ГЄГ«Г ГЄГ®ГўГ  Г‚Г Г«ГҐГ°ГЁГї ГЂГ‘-22-05
+// ГЂГ‹ГѓГЋГђГ€Г’ГЊ SIDEWINDER
+void Sidewinder(Maze& maze);

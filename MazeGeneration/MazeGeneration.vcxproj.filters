@@ -25,6 +25,10 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="EllerMazepa.cpp">
+    <ClCompile Include="AldousBroderGersh.cpp">
+    <ClCompile Include="PrimeAliev.cpp">
+    <ClCompile Include="BinaryTreeKononchuk.cpp">
+    <ClCompile Include="SidewinderSaklakova.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
