@@ -24,6 +24,7 @@
     <ClCompile Include="Maze.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="AldousBroderGersh.cpp">
     <ClCompile Include="PrimeAliev.cpp">
     <ClCompile Include="BinaryTreeKononchuk.cpp">
     <ClCompile Include="SidewinderSaklakova.cpp">

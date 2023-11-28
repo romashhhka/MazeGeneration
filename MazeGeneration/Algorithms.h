@@ -12,6 +12,10 @@ using Algorithm = void(*)(Maze& maze);
 // Èëüè÷åâ Ðîìàí ÀÑ-22-05
 // ÀËÃÎÐÈÌÒ ÎÁÐÀÒÍÎÃÎ ÎÒÑËÅÆÈÂÀÍÈß - RECURSIVE BACKTRACKER
 void RecursiveBacktracker(Maze& maze);
+
+// ���� ������� ��-22-05
+// �������� ������-������� - ALDOUS-BRODER
+void AldousBroder(Maze& maze);
 void Prime(Maze& maze);
 //áåðåçêà
 void BinaryTree(Maze& maze);
