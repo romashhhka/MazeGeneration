@@ -42,10 +42,11 @@ int main() {
     int width = GetCorrectNumber(5, 50);
     cout << "Введите высоту лабиринту: ";
     int height = GetCorrectNumber(5, 50);*/
-    int width = 15;
-    int height = 15;
-
+    int width = 5;
+    int height = 5;
+    
     Maze maze(width, height);
+    Run(Eller, maze, "Мазепа Александр АС-22-05");
     Run(AldousBroder, maze, "Герш Алексей АС-22-05");
     Run(Prime, maze, "Алиев Али АС-22-05");
     Run(RecursiveBacktracker, maze, "Ильичев Роман АС-22-05");
