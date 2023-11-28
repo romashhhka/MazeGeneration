@@ -130,6 +130,7 @@
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="MazeGeneration.cpp" />
     <ClCompile Include="RecursiveBacktrackerIlichev.cpp" />
+    <ClCompile Include="SidewinderSaklakova.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Algorithms.h" />

@@ -48,6 +48,11 @@ int main() {
     Maze maze(width, height);
     Run(RecursiveBacktracker, maze, "Ильичев Роман АС-22-05");
 
+    //Maze maze(width, height);
+    Run(Sidewinder, maze, "Саклакова Валерия АС - 22 - 05");
+    //Sidewinder(maze);
+    
+
     //RecursiveBacktracker(maze);
 }
 
