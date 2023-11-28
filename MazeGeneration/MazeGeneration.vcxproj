@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EllerMazepa.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="MazeGeneration.cpp" />
     <ClCompile Include="RecursiveBacktrackerIlichev.cpp" />
