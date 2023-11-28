@@ -46,15 +46,9 @@ int main() {
     int height = 15;
 
     Maze maze(width, height);
+    Run(Prime, maze, "Алиев Али АС-22-05");
     Run(RecursiveBacktracker, maze, "Ильичев Роман АС-22-05");
-  
-    maze.Clear();
     Run(BinaryTree, maze, "Конончук Виктор АС-22-05");
-
-    //Maze maze(width, height);
     Run(Sidewinder, maze, "Саклакова Валерия АС - 22 - 05");
-    //Sidewinder(maze);
-    
-    //RecursiveBacktracker(maze);
 }
 
