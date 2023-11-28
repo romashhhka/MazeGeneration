@@ -9,10 +9,16 @@
 
 using Algorithm = void(*)(Maze& maze);
 
-// »льичев –оман ј—-22-05
-// јЋ√ќ–»ћ“ ќЅ–ј“Ќќ√ќ ќ“—Ћ≈∆»¬јЌ»я - RECURSIVE BACKTRACKER
+// √И√Ђ√Љ√®√Ј√•√Ґ √Р√Ѓ√ђ√†√≠ √А√С-22-05
+// √А√Л√Г√О√Р√И√М√Т √О√Б√Р√А√Т√Н√О√Г√О √О√Т√С√Л√Е√Ж√И√В√А√Н√И√Я - RECURSIVE BACKTRACKER
 void RecursiveBacktracker(Maze& maze);
 
-// √ерш јлексей ј—-22-05
-// јЋ√ќ–»ћ“ ќЋƒќ—ј-Ѕ–ќƒ≈–ј - ALDOUS-BRODER
+// пњљпњљпњљпњљ пњљпњљпњљпњљпњљпњљпњљ пњљпњљ-22-05
+// пњљпњљпњљпњљпњљпњљпњљпњљ пњљпњљпњљпњљпњљпњљ-пњљпњљпњљпњљпњљпњљпњљ - ALDOUS-BRODER
 void AldousBroder(Maze& maze);
+void Prime(Maze& maze);
+//√°√•√∞√•√І√™√†
+void BinaryTree(Maze& maze);
+// √С√†√™√Ђ√†√™√Ѓ√Ґ√† √В√†√Ђ√•√∞√®√њ √А√С-22-05
+// √А√Л√Г√О√Р√И√Т√М SIDEWINDER
+void Sidewinder(Maze& maze);
