@@ -127,10 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BinaryTreeKononchuk.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="MazeGeneration.cpp" />
     <ClCompile Include="PrimeAliev.cpp" />
     <ClCompile Include="RecursiveBacktrackerIlichev.cpp" />
+    <ClCompile Include="SidewinderSaklakova.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Algorithms.h" />

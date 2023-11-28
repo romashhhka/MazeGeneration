@@ -47,6 +47,8 @@ int main() {
 
     Maze maze(width, height);
     Run(Prime, maze, "Алиев Али АС-22-05");
-    //RecursiveBacktracker(maze);
+    Run(RecursiveBacktracker, maze, "Ильичев Роман АС-22-05");
+    Run(BinaryTree, maze, "Конончук Виктор АС-22-05");
+    Run(Sidewinder, maze, "Саклакова Валерия АС - 22 - 05");
 }
 
