@@ -11,11 +11,8 @@ void InitRow(Maze& maze, vector<Cell>& row_set, int y)
 
 		if (max_set <= row_set[x].set)
 			max_set = row_set[x].set + 1;
-		
 		if (row_set[x].Bottom == Close)
 			row_set[x].set = -1;
-		cout << x << " " << row_set[x].Bottom << " " << row_set[x].set << endl;
-
 		if (row_set[x].Bottom == Open)
 			row_set[x].Top = Open;
 		else
@@ -163,20 +160,16 @@ void Eller(Maze& maze)
 	for (int i = 0; i < maze.width; i++)
 		row_set[i].set = 0;
 	InitRow(maze, row_set, y);
-	Print(row_set);
 
 	while (y != maze.height - 1) {
 		
 			CreateWalls(maze, row_set, y);
 			FillMaze(maze, row_set, y);
 
-			maze.CreateMasForOutput();
-			maze.Output();
 			cout << endl;
 
 			y++;
 			InitRow(maze, row_set, y);
-			Print(row_set);
 	
 		
 	}
