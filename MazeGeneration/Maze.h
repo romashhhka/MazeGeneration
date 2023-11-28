@@ -18,6 +18,7 @@ struct Cell
 {
     int x;
     int y;
+    int set;
     bool visited;
     CellState Left;
     CellState Right;
