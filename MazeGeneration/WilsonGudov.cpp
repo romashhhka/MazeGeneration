@@ -83,22 +83,22 @@ void BuildPath(std::vector<Cell>& path, Maze& maze)// добовляет путь в лабиринт
             maze.cell(nx, ny).visited = true;
         }
        
-        if (path[i + 1].x - path[i].x == 1 && path[i + 1].y - path[i].y == 0)//вверх
+        if (path[i + 1].x - path[i].x == 0 && path[i + 1].y - path[i].y == -1)//вверх
         {
             maze.cell(x, y).Top = Open;
             maze.cell(nx, ny).Bottom = Open;
         }
-        if (path[i + 1].x - path[i].x == -1 && path[i + 1].y - path[i].y == 0)//вниз
+        if (path[i + 1].x - path[i].x == 0 && path[i + 1].y - path[i].y == 1)//вниз
         {
             maze.cell(x, y).Bottom = Open;
             maze.cell(nx, ny).Top = Open;
         }
-        if (path[i + 1].x - path[i].x == 0 && path[i + 1].y - path[i].y == 1)//вправо
+        if (path[i + 1].x - path[i].x == 1 && path[i + 1].y - path[i].y == 0)//вправо
         {
             maze.cell(x, y).Right = Open;
             maze.cell(nx, ny).Left = Open;
         }
-        if (path[i + 1].x - path[i].x == 0 && path[i + 1].y - path[i].y == -1)//влево
+        if (path[i + 1].x - path[i].x == 1 && path[i + 1].y - path[i].y == 0)//влево
         {
             maze.cell(x, y).Left = Open;
             maze.cell(nx, ny).Right = Open;
@@ -118,6 +118,7 @@ bool NotLightCercle(std::vector<Cell>& path)//НАПИСАТЬ проверяет на микроциклы
         //среднее между минимальным и максимальным значениями среди последних 4 клеток 
         //сравнение идет по x и y и если соответствующие значения совпадают по обеим 
         //координатам то образуется цикл из 4 клеток
+        //здесь что то не работает как будто
         if (((Min(path, 'x') + Max(path, 'x')) / 2 == (path[path.size()-1].x + path[path.size() - 2].x + path[path.size() - 3].x + path[path.size() - 4].x) / 4) && 
             ((Min(path, 'y') + Max(path, 'y')) / 2 == (path[path.size()-1].y + path[path.size() - 2].y + path[path.size() - 3].y + path[path.size() - 4].y) / 4))
         {
@@ -205,7 +206,7 @@ void WilsonAlgorithm(Maze& maze)//нужна проверка на то что клетка окружена уже п
 
         int nextX;
         int nextY;
-
+        int time = 0;
         std::vector<Cell> path;//путь остовного дерева
         path.push_back(maze.cell(currentX, currentY));
         bool alreadyIs;
@@ -214,6 +215,7 @@ void WilsonAlgorithm(Maze& maze)//нужна проверка на то что клетка окружена уже п
 
         while (ThereAreUnvisitedCells(maze))//создаем путь до ячеек которые уже есть в лабиринте
         {
+            time++;
             last_size = path.size();
             nextX = currentX;//нужна проверка на циклы 
             nextY = currentY;
@@ -228,12 +230,15 @@ void WilsonAlgorithm(Maze& maze)//нужна проверка на то что клетка окружена уже п
             {
                 path.push_back(maze.cell(nextX, nextY));
                 BuildPath(path, maze);
+                maze.CreateMasForOutput();
+                maze.Output();
+                std::cout << std::endl;
                 path.clear();
                 std::tie(currentX, currentY) = chooseRandomUnvisitedCell(maze);
                 nextX = currentX;
                 nextY = currentY;
             }
-            if (NotLightCercle(path)) //Проверка на мини циклы
+            //if (NotLightCercle(path)) //Проверка на мини циклы
             {
                 if (!alreadyIs)
                 {
@@ -242,17 +247,17 @@ void WilsonAlgorithm(Maze& maze)//нужна проверка на то что клетка окружена уже п
                     currentY = nextY;
                 }
             }   
-            else
+            /*else
             {
                 for (int i = 0; i < 3; i++)
                 {
                     path.pop_back();
-                    currentX = path[path.size() - 1].x;//перенеси вниз за фигурные скобки
-                    currentY = path[path.size() - 1].y;//перенеси вниз за фигурные скобки
-                    nextX = currentX;                  //перенеси вниз за фигурные скобки
-                    nextY = currentY;                  //перенеси вниз за фигурные скобки
                 }
-            }
+                currentX = path[path.size() - 1].x;
+                currentY = path[path.size() - 1].y;
+                nextX = currentX;                  
+                nextY = currentY;                 
+            }*/ 
 
             if (last_size==path.size())
             {
@@ -269,5 +274,7 @@ void WilsonAlgorithm(Maze& maze)//нужна проверка на то что клетка окружена уже п
                     nextX = currentX; 
                     nextY = currentY;
             }
+           // if (time == 1000000)
+             //   break;
         }
 }
