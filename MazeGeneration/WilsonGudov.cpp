@@ -230,8 +230,8 @@ void WilsonAlgorithm(Maze& maze)//нужна проверка на то что клетка окружена уже п
             {
                 path.push_back(maze.cell(nextX, nextY));
                 BuildPath(path, maze);
-                maze.CreateMasForOutput();
-                maze.Output();
+                /*maze.CreateMasForOutput();
+                maze.Output();*/
                 std::cout << std::endl;
                 path.clear();
                 std::tie(currentX, currentY) = chooseRandomUnvisitedCell(maze);

@@ -12,27 +12,7 @@ Cell::Cell()
 
 void Maze::Output()
 {
-
-    //system("cls");
-    for (int row = 0; row < (height_for_output); ++row)
-    {
-        for (int col = 0; col < (width_for_output); ++col)
-            cout << mas_for_output[row][col];
-        cout << endl;
-    }
-}
-
-void Maze::CreateMasForOutput()
-{
-    vector<char> mas_row(width_for_output);
-
-    for (int row = 0; row < (height_for_output); ++row)
-    {
-        for (int col = 0; col < (width_for_output); ++col)
-            mas_row[col] = '#';
-        mas_for_output[row] = mas_row;
-    }
-
+    vector<vector<char>> mas_for_output(height * 2 + 1, (vector<char>(width * 2 + 1, '#')));
     for (auto& cells_row : cells)
     {
         for (auto& cell : cells_row)
@@ -48,28 +28,13 @@ void Maze::CreateMasForOutput()
                 mas_for_output[2 + cell.y * 2][1 + cell.x * 2] = ' ';
         }
     }
-}
 
-void Maze::Clear()
-{
-    for (int row = 0; row < (height_for_output); ++row)
+    for (int row = 0; row < (height * 2 + 1); ++row)
     {
-        for (int col = 0; col < (width_for_output); ++col)
-            mas_for_output[row][col] = '#';
+        for (int col = 0; col < (width * 2 + 1); ++col)
+            cout << mas_for_output[row][col];
+        cout << endl;
     }
-
-    for (auto& cells_row : cells)
-    {
-        for (auto& cell : cells_row)
-        {
-            cell.Bottom = Close;
-            cell.Top = Close;
-            cell.Left = Close;
-            cell.Right = Close;
-            cell.visited = false;
-        }
-    }
-
 }
 
 Cell& Maze::cell(int x, int y)
@@ -81,21 +46,15 @@ Maze::Maze(int Width, int Height)
 {
     width = Width;
     height = Height;
-    height_for_output = Height * 2 + 1;
-    width_for_output = Width * 2 + 1;
-    mas_for_output.resize(height_for_output);
-    cells.resize(height);
 
-    vector<Cell> maze_row(width);
     Cell cell;
-    for (int row = 0; row < height; ++row) {
-        for (int column = 0; column < width; ++column) {
-            cell.y = row;
-            cell.x = column;
-            cell.visited = false;
-            maze_row[column] = cell;
+    cells.resize(height, (vector<Cell>(width, cell)));
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            cells[y][x].y = y;
+            cells[y][x].x = x;
+            cells[y][x].visited = false;
         }
-        cells[row] = maze_row;
     }
 }
 

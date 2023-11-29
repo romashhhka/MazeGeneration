@@ -13,18 +13,30 @@
 
 using Algorithm = void(*)(Maze& maze);
 
-// Èëüè÷åâ Ðîìàí ÀÑ-22-05
-// ÀËÃÎÐÈÌÒ ÎÁÐÀÒÍÎÃÎ ÎÒÑËÅÆÈÂÀÍÈß - RECURSIVE BACKTRACKER
-void RecursiveBacktracker(Maze& maze);
-void WilsonAlgorithm(Maze& maze);
-// ������ ��������� ��-22-05
-void Eller(Maze& maze);
-// ���� ������� ��-22-05
-// �������� ������-������� - ALDOUS-BRODER
-void AldousBroder(Maze& maze);
-void Prime(Maze& maze);
-//áåðåçêà
+/*Конончук Виктор АС-22-05
+АЛГОРИТМ ДВОИЧНОГО ДЕРЕВА*/
 void BinaryTree(Maze& maze);
-// Ñàêëàêîâà Âàëåðèÿ ÀÑ-22-05
-// ÀËÃÎÐÈÒÌ SIDEWINDER
+
+/*Саклакова Валерия АС-22-05
+"SIDEWINDER"*/
 void Sidewinder(Maze& maze);
+
+/*Ильичев Роман АС-22-05
+"RECURSIVE "BACKTRACKER"*/
+void RecursiveBacktracker(Maze& maze);
+
+/*Алиев Али АС-22-05
+АЛГОРИТМ ПРИМА*/
+void Prime(Maze& maze);
+
+/*Герш Алексей АС-22-05
+АЛГОРИТМ ОЛДОСА-БРОДЕРА*/
+void AldousBroder(Maze& maze);
+
+/*Мазепа Александер АС-22-05
+АЛГОРИТМ ЭЛЛЕРА*/
+void Eller(Maze& maze);
+
+/*Гудов Никита АС-22-05
+АЛГОРИТМ УИЛСОНА*/
+void WilsonAlgorithm(Maze& maze);

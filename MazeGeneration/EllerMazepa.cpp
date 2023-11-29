@@ -5,7 +5,6 @@ using namespace std;
 void InitRow(Maze& maze, vector<Cell>& row_set, int y)
 {
 
-
 	int max_set = 0;
 	for (int x = 0; x < row_set.size(); x++) {
 
@@ -116,11 +115,8 @@ void CreateWalls(Maze& maze, vector<Cell>& row_set, int y)
 			if (i == maze.width - 1)
 				CreateBottomWalls(row_set, i + 1, count);
 		}
-
 	}
-
 }
-
 
 
 void CreateWallsAtLastRow(Maze& maze, vector<Cell>& row_set, int y)
@@ -140,7 +136,6 @@ void CreateWallsAtLastRow(Maze& maze, vector<Cell>& row_set, int y)
 	}
 
 }
-
 
 void Print(vector<Cell>& row_cell)
 {
@@ -165,13 +160,8 @@ void Eller(Maze& maze)
 		
 			CreateWalls(maze, row_set, y);
 			FillMaze(maze, row_set, y);
-
-			cout << endl;
-
 			y++;
 			InitRow(maze, row_set, y);
-	
-		
 	}
 	CreateWallsAtLastRow(maze, row_set, y);
 	FillMaze(maze, row_set, y);

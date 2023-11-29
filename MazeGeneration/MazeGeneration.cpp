@@ -1,7 +1,4 @@
 #include <iostream>
-#include <vector>
-#include <stack>
-#include <stdlib.h>
 #include <time.h>
 #include <chrono>
 #include "Algorithms.h"
@@ -21,37 +18,37 @@ int GetCorrectNumber(int min, int max)
     return x;
 }
 
-void Run(Algorithm a, Maze& maze, string author)
+void Run(Algorithm a, Maze maze, string author, string name_alg)
 {
     auto start = chrono::system_clock::now();
     a(maze);
     auto stop = chrono::system_clock::now();
     auto time = chrono::duration_cast<chrono::microseconds>(stop - start).count();
 
-    maze.CreateMasForOutput();
+    cout << "----------------------------------------------------" << endl;
+    cout << "Algorithm: " << name_alg << endl;
+    cout << "Author: " << author << endl;
+    cout << "Time of maze generation: " << time << " mcs." << endl;
+    cout << "----------------------------------------------------" << endl;
     maze.Output();
-    maze.Clear();
-    cout << "Время генерации алгоритма: " << time << " mcs.\n";
-    cout << "Программу написал: " << author << "\n";
+    cout << endl;
 }
 
 int main() {
-    setlocale(LC_ALL, "Russian");
-
-    /*cout << "Введите ширину лабиринту: ";
+    /*cout << "Width of maze: ";
     int width = GetCorrectNumber(5, 50);
-    cout << "Введите высоту лабиринту: ";
+    cout << "Height of maze: ";
     int height = GetCorrectNumber(5, 50);*/
     int width = 15;
     int height = 15;
   
     Maze maze(width, height);
-    Run(Eller, maze, "Мазепа Александр АС-22-05");
-    Run(AldousBroder, maze, "Герш Алексей АС-22-05");
-    Run(Prime, maze, "Алиев Али АС-22-05");
-    Run(RecursiveBacktracker, maze, "Ильичев Роман АС-22-05");
-    Run(WilsonAlgorithm, maze, "Гудов Никита АС-22-05");
-    Run(BinaryTree, maze, "Конончук Виктор АС-22-05");
-    Run(Sidewinder, maze, "Саклакова Валерия АС - 22 - 05");
+    Run(BinaryTree, maze, "Kononchuk Victor AS-22-05", "BinaryTree");
+    Run(Sidewinder, maze, "Saklakova Valeriya AS-22-05", "Sidewinder");
+    Run(RecursiveBacktracker, maze, "Ilichev Roman AS-22-05", "RecursiveBacktracker");
+    Run(Prime, maze, "Aliev Ali AS-22-05", "Prime");
+    Run(AldousBroder, maze, "Gersh Alexey AS-22-05", "AldousBroder");
+    Run(Eller, maze, "Mazepa Alexander AS-22-05", "Eller");
+    //Run(WilsonAlgorithm, maze, "Gudov Nikita AS-22-05", "Wilson");
 }
 
