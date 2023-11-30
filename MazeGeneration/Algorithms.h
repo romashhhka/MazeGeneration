@@ -39,4 +39,4 @@ void Eller(Maze& maze);
 
 /*Гудов Никита АС-22-05
 АЛГОРИТМ УИЛСОНА*/
-void WilsonAlgorithm(Maze& maze);
+void Wilson(Maze& maze);

@@ -1,280 +1,120 @@
 #include "Algorithms.h"
+#include <cstdlib>  // ƒл€ использовани€ функции rand()
+#include <ctime>    // ƒл€ инициализации генератора случайных чисел
 
-//функци€ дл€ проверки, посещена ли €чейка
-bool isCellVisited(Maze& maze, int x, int y)
+using namespace std;
+
+void RandomCell(Maze& maze, int& curr_x, int& curr_y)
 {
-    return  maze.cell(x, y).visited;
+    do {
+        curr_x = rand() % maze.width;
+        curr_y = rand() % maze.height;
+    } while (maze.cell(curr_x, curr_y).visited);
 }
 
-//поиск минимальной координаты
-int Min(std::vector<Cell>& path,char par)
+vector<pair<int, int>> FindAdjacentCells(Maze& maze, int x, int y)
 {
-    int ans = 100000;
-    if (par=='x')
-    {
-        if (path[path.size()-1].x < ans)
-            ans = path[path.size()-1].x;
-        if (path[path.size()-2].x < ans)
-            ans = path[path.size()-2].x;
-        if (path[path.size()-3].x < ans)
-            ans = path[path.size()-3].x;
-        if (path[path.size()-4].x < ans)
-            ans = path[path.size()-4].x;
-    }
-    else if(par == 'y')
-    {
-        if (path[path.size()-1].y < ans)
-            ans = path[path.size()-1].y;
-        if (path[path.size() - 2].y < ans)
-            ans = path[path.size()-2].y;
-        if (path[path.size() - 3].y < ans)
-            ans = path[path.size()-3].y;
-        if (path[path.size() - 4].y < ans)
-            ans = path[path.size()-4].y;
-    }
-    return ans;
+    vector<pair<int, int>> free_cell;
+    if (x > 0) //провер€ем левую €чейку
+        free_cell.push_back({ x - 1, y });
+    if (x < (maze.width - 1))
+        free_cell.push_back({ x + 1, y });
+    if (y > 0)
+        free_cell.push_back({ x, y - 1 });
+    if (y < (maze.height - 1))
+        free_cell.push_back({ x, y + 1 });
+
+    return free_cell;
 }
 
-//поиск максимальной координаты
-int Max(std::vector<Cell>& path, char par)
+bool hasCycle(vector<pair<int, int>>& path, int x, int y)
 {
-    int ans = -1;
-    if (par == 'x')
-    {
-        if (path[path.size()-1].x > ans)
-            ans = path[path.size()-1].x;
-        if (path[path.size() - 2].x > ans)
-            ans = path[path.size()-2].x;
-        if (path[path.size() - 3].x > ans)
-            ans = path[path.size()-3].x;
-        if (path[path.size() - 4].x > ans)
-            ans = path[path.size()-4].x;
+
+    for (int i = 0; i < path.size(); i++) {
+        if (path[i].first == x && path[i].second == y) {
+            path.erase(path.begin() + i + 1, path.end());
+            return true;
+        }
     }
-    else if (par == 'y')
-    {
-        if (path[path.size()-1].y > ans)
-            ans = path[path.size()-1].y;
-        if (path[path.size() - 2].y > ans)
-            ans = path[path.size()-2].y;
-        if (path[path.size() - 3].y > ans)
-            ans = path[path.size()-3].y;
-        if (path[path.size() - 4].y > ans)
-            ans = path[path.size()-4].y;
-    }
-    return ans;
+    return false;
 }
 
-void BuildPath(std::vector<Cell>& path, Maze& maze)// добовл€ет путь в лабиринт
+void OpenWall(Maze& maze, pair<int, int>& first_cell, pair<int, int>& second_cell)
 {
-    int x = 0, y = 0, nx = 0, ny = 0;
-    for (int i = 0; i < path.size()-2; i++)
-    {
-       
-        x = path[i].x;
-        y = path[i].y; 
-        if (!maze.cell(x,y).visited)
-        {
-            maze.cell(x, y).visited = true;
+    int x1 = first_cell.first;
+    int x2 = second_cell.first;
+    int y1 = first_cell.second;
+    int y2 = second_cell.second;
+
+    if (x1 == x2) {
+        if (y1 < y2) {
+            maze.cell(x1, y1).Bottom = Open;
+            maze.cell(x2, y2).Top = Open;
         }
-        nx = path[i+1].x;
-        ny = path[i+1].y;
-        if (!maze.cell(nx, ny).visited)
-        {
-            maze.cell(nx, ny).visited = true;
+        else {
+            maze.cell(x1, y1).Top = Open;
+            maze.cell(x2, y2).Bottom = Open;
         }
-       
-        if (path[i + 1].x - path[i].x == 0 && path[i + 1].y - path[i].y == -1)//вверх
-        {
-            maze.cell(x, y).Top = Open;
-            maze.cell(nx, ny).Bottom = Open;
+
+    }
+
+    if (y1 == y2) {
+        if (x1 < x2) {
+            maze.cell(x1, y1).Right = Open;
+            maze.cell(x2, y2).Left = Open;
         }
-        if (path[i + 1].x - path[i].x == 0 && path[i + 1].y - path[i].y == 1)//вниз
-        {
-            maze.cell(x, y).Bottom = Open;
-            maze.cell(nx, ny).Top = Open;
-        }
-        if (path[i + 1].x - path[i].x == 1 && path[i + 1].y - path[i].y == 0)//вправо
-        {
-            maze.cell(x, y).Right = Open;
-            maze.cell(nx, ny).Left = Open;
-        }
-        if (path[i + 1].x - path[i].x == 1 && path[i + 1].y - path[i].y == 0)//влево
-        {
-            maze.cell(x, y).Left = Open;
-            maze.cell(nx, ny).Right = Open;
+        else {
+            maze.cell(x1, y1).Left = Open;
+            maze.cell(x2, y2).Right = Open;
         }
     }
 
-
 }
 
-bool NotLightCercle(std::vector<Cell>& path)//Ќјѕ»—ј“№ провер€ет на микроциклы
+void Wilson(Maze& maze)
 {
-    int size = path.size();
-    if (size < 4)
-        return 1;
-    else
-        //данное условие берет среднее значение среди 4 последних клеток и 
-        //среднее между минимальным и максимальным значени€ми среди последних 4 клеток 
-        //сравнение идет по x и y и если соответствующие значени€ совпадают по обеим 
-        //координатам то образуетс€ цикл из 4 клеток
-        //здесь что то не работает как будто
-        if (((Min(path, 'x') + Max(path, 'x')) / 2 == (path[path.size()-1].x + path[path.size() - 2].x + path[path.size() - 3].x + path[path.size() - 4].x) / 4) && 
-            ((Min(path, 'y') + Max(path, 'y')) / 2 == (path[path.size()-1].y + path[path.size() - 2].y + path[path.size() - 3].y + path[path.size() - 4].y) / 4))
-        {
-            return 0;
-        }
-        else
-            return 1;
-}
+    srand(time(NULL));
+    int unvisitedCells = maze.width * maze.height;
 
-bool ThereAreUnvisitedCells(Maze& maze)
-{
-    for (int i = 0; i < maze.width; i++)
+    // ¬ыбираем случайно первую €чейку
+    int start_x = rand() % maze.width;
+    int start_y = rand() % maze.height;
+    int curr_x;
+    int curr_y;
+
+    maze.cell(start_x, start_y).visited = true;
+    unvisitedCells--;
+
+    // »значально все €чейки помечены как непосещенные
+    while (unvisitedCells > 0)
     {
-        for (int j = 0; j < maze.height; j++)
+        vector<pair<int, int>> path;
+        RandomCell(maze, start_x, start_y);
+        path.push_back({ start_x, start_y });
+        curr_x = start_x;
+        curr_y = start_y;
+
+        while (!maze.cell(curr_x, curr_y).visited)
         {
-            if (!maze.cell(i, j).visited)
-                return 1;
+
+            vector<pair<int, int>> adjacent_cells = FindAdjacentCells(maze, curr_x, curr_y);
+            int rand_cell = rand() % adjacent_cells.size();
+            curr_x = adjacent_cells[rand_cell].first;
+            curr_y = adjacent_cells[rand_cell].second;
+
+            if (!hasCycle(path, curr_x, curr_y))
+                path.push_back({ curr_x, curr_y });
+
         }
+
+        for (int i = 0; i < path.size(); i++) {
+            unvisitedCells--;
+            maze.cell(path[i].first, path[i].second).visited = true;
+            if (i != path.size() - 1)
+                OpenWall(maze, path[i], path[i + 1]);
+        }
+        unvisitedCells++;
+
     }
-    return 0;
-}
 
-//функци€ дл€ выбора случайной непосещенной €чейки
-std::pair<int, int> chooseRandomUnvisitedCell(Maze& maze)
-{
-    int x, y;
-    do
-    {
-        x = rand() % maze.width;
-        y = rand() % maze.height;
-    } while (isCellVisited(maze, x, y));
-
-    return { x, y };
-}
-
-//функци€ дл€ выбора случайного направлени€
-int chooseRandomDirection()
-{
-    //srand(time(NULL));
-    return rand() % 4;
-}
-
-//функци€ дл€ перемещени€ в определенном направлении с условием что мы не выходим за границы лабиринта
-void moveInDirection(int& x, int& y, int direction, Maze& maze)
-{
-    switch (direction)
-    {
-    case 0:
-        if (x>0)
-            x -= 1;//влево
-        else
-            moveInDirection(x, y, chooseRandomDirection(), maze);
-        break;
-    case 1:
-        if (x<maze.width-1)
-            x += 1;//вправо
-        else
-            moveInDirection(x, y, chooseRandomDirection(), maze);
-        break;
-    case 2:
-        if (y>0)
-            y -= 1;//вниз
-        else
-            moveInDirection(x, y, chooseRandomDirection(), maze);
-        break;
-    case 3:
-        if (y<maze.height-1)
-            y += 1;//вверх
-        else
-            moveInDirection(x, y, chooseRandomDirection(), maze);
-        break;
-    }
-}
-
-void WilsonAlgorithm(Maze& maze)//нужна проверка на то что клетка окружена уже пройдеными клетками в данном пути
-{
-        // ¬ыбираем случайную стартовую €чейку
-        int startX, startY;
-        std::tie(startX, startY) = chooseRandomUnvisitedCell(maze);
-        maze.cell(startX, startY).visited = true;
-
-        // ¬ыбираем случайную стартовую €чейку c которой начнетс€ построение первого остовного графа
-        int currentX, currentY;
-        std::tie(currentX, currentY) = chooseRandomUnvisitedCell(maze);
-
-        int nextX;
-        int nextY;
-        int time = 0;
-        std::vector<Cell> path;//путь остовного дерева
-        path.push_back(maze.cell(currentX, currentY));
-        bool alreadyIs;
-        int count = 0;
-        int last_size;
-
-        while (ThereAreUnvisitedCells(maze))//создаем путь до €чеек которые уже есть в лабиринте
-        {
-            time++;
-            last_size = path.size();
-            nextX = currentX;//нужна проверка на циклы 
-            nextY = currentY;
-            alreadyIs = 0;
-            moveInDirection(nextX, nextY, chooseRandomDirection(), maze);
-            for (int i = 0; i < path.size(); i++)//провер€ем что мы не идем по уже добавленным в путь клеткам чтобы не создавать циклы
-            {
-                if (path[i].x == nextX && path[i].y == nextY)
-                    alreadyIs = 1;
-            }
-            if (maze.cell(nextX, nextY).visited)
-            {
-                path.push_back(maze.cell(nextX, nextY));
-                BuildPath(path, maze);
-                /*maze.CreateMasForOutput();
-                maze.Output();*/
-                std::cout << std::endl;
-                path.clear();
-                std::tie(currentX, currentY) = chooseRandomUnvisitedCell(maze);
-                nextX = currentX;
-                nextY = currentY;
-            }
-            //if (NotLightCercle(path)) //ѕроверка на мини циклы
-            {
-                if (!alreadyIs)
-                {
-                    path.push_back(maze.cell(nextX, nextY));
-                    currentX = nextX;
-                    currentY = nextY;
-                }
-            }   
-            /*else
-            {
-                for (int i = 0; i < 3; i++)
-                {
-                    path.pop_back();
-                }
-                currentX = path[path.size() - 1].x;
-                currentY = path[path.size() - 1].y;
-                nextX = currentX;                  
-                nextY = currentY;                 
-            }*/ 
-
-            if (last_size==path.size())
-            {
-                count++;
-            }
-            else
-            {
-                count = 0;
-            }
-            if (count == 15)
-            {
-                    path.clear();
-                    std::tie(currentX, currentY) = chooseRandomUnvisitedCell(maze);
-                    nextX = currentX; 
-                    nextY = currentY;
-            }
-           // if (time == 1000000)
-             //   break;
-        }
 }

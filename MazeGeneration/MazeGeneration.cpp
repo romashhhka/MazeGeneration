@@ -50,6 +50,6 @@ int main() {
     Run(Prime, maze, "Aliev Ali AS-22-05", "Prime");
     Run(AldousBroder, maze, "Gersh Alexey AS-22-05", "AldousBroder");
     Run(Eller, maze, "Mazepa Alexander AS-22-05", "Eller");
-    //Run(WilsonAlgorithm, maze, "Gudov Nikita AS-22-05", "Wilson");
+    Run(Wilson, maze, "Gudov Nikita AS-22-05", "Wilson");
 }
 
