@@ -30,7 +30,7 @@ void Run(Algorithm a, Maze maze, string author, string name_alg)
     cout << "Author: " << author << endl;
     cout << "Time of maze generation: " << time << " mcs." << endl;
     cout << "----------------------------------------------------" << endl;
-    maze.Output();
+    //maze.Output();
     cout << endl;
 }
 
@@ -38,11 +38,12 @@ int main() {
     /*cout << "Width of maze: ";
     int width = GetCorrectNumber(5, 50);
     cout << "Height of maze: ";
-    int height = GetCorrectNumber(5, 50);*/
-    int width = 15;
-    int height = 15;
+    int height = GetCorrectNumber(5, 50);
+    int width = 10;
+    int height = 10;*/
+    int n = 50;
   
-    Maze maze(width, height);
+    Maze maze(n, n);
     Run(BinaryTree, maze, "Kononchuk Victor AS-22-05", "BinaryTree");
     Run(Sidewinder, maze, "Saklakova Valeriya AS-22-05", "Sidewinder");
     Run(RecursiveBacktracker, maze, "Ilichev Roman AS-22-05", "RecursiveBacktracker");
